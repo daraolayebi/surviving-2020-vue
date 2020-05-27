@@ -925,7 +925,11 @@ input {
         font-size: 13px;
     }
     .about-inner h1 {
-        font-size: 16px;
+        display: none;
+    }
+    .about-inner h1.main {
+        display: block;
+        font-size: 30px;
     }
     .header {
         padding: 30px 5%;
@@ -950,6 +954,14 @@ input {
 }
 
 @media screen and (max-width: 375px) {
+    .about-inner h1.main {
+        font-size: 28px;
+    }
+
+    .header,
+    .header {
+        padding: 30px 5% 60px;
+    }
     .main-label {
         font-size: 30px;
     }
