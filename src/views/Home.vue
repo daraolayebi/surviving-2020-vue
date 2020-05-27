@@ -1,34 +1,25 @@
 <template>
-    <div class="main-body" :style="{ background: `${backgroundColor}` }">
-        <div class="main-body-inner">
-            <user-form @updated-phrase="updateBackground" />
+    <div id="about" class="about">
+        <app-header />
+        <div class="about-inner">
+            <h1 class="main">Take a moment to
+                <span data-title="share your pandemic experience">share your pandemic experience </span> or discover
+                <span>what the rest of the world is going through</span>.
+            </h1>
+            <h1>While this platform does not provide a cure for the virus, healing for those mourning or medicine for the sick, it was built in the hope that it will lift your spirit and make you feel a little more connected to the rest of the world during this pandemic.
+            </h1>
         </div>
+        <app-footer />
     </div>
 </template>
 
 <script>
-import UserForm from "../components/UserForm";
+import AppHeader from "../components/Header";
+import AppFooter from "../components/Footer";
 export default {
   components: {
-    UserForm,
-  },
-  data() {
-    return {
-      phraseId: "1",
-    };
-  },
-  computed: {
-    backgroundColor() {
-      if (this.phraseId == 1) return "#5C6996";
-      else if (this.phraseId == 2) return "#A96767";
-      else if (this.phraseId == 3) return "#C1AF7E";
-      else if (this.phraseId == 4) return "#5C9688";
-    },
-  },
-  methods: {
-    updateBackground(id) {
-      this.phraseId = id;
-    },
+    AppHeader,
+    AppFooter,
   },
 };
 </script>

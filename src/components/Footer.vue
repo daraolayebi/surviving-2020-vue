@@ -1,10 +1,30 @@
 <template>
     <footer class="footer">
         <ul>
-            <li @click="showAboutContent('body', '.about')">About Project
-                <!-- <router-link to="/about">About Project</router-link> -->
-            </li>
-            <li>Change Language</li>
+            <template v-if="$route.path == '/'">
+                <li class="footer-link" @mouseover="updateBg('green')" @mouseleave="removeBg('green')">
+                    <router-link to="/submit">Share your experience</router-link>
+                </li>
+                <li class="footer-link" @mouseover="updateBg('pink')" @mouseleave="removeBg('pink')">
+                    <router-link to="/responses">Explore responses</router-link>
+                </li>
+            </template>
+            <template v-if="$route.path == '/submit'">
+                <li class="footer-link">
+                    <router-link to="/">Go Back Home</router-link>
+                </li>
+                <li class="footer-link">
+                    <router-link to="/responses">Explore responses</router-link>
+                </li>
+            </template>
+            <template v-if="$route.path == '/responses'">
+                <li v-if="$route.path == '/responses'" class="footer-link">
+                    <router-link to="/submit">Share your experience</router-link>
+                </li>
+                <li class="footer-link">
+                    <router-link to="/">Go Back Home</router-link>
+                </li>
+            </template>
         </ul>
     </footer>
 </template>
@@ -12,15 +32,14 @@
 <script>
 export default {
   methods: {
-    showAboutContent(body, about) {
-      let el = document.querySelector(body);
-      let ab = document.querySelector(about);
-      el.classList.add("slide-out");
-      ab.classList.add("visible");
+    updateBg(color) {
+      let about = document.querySelector(".about");
+      about.classList.add(color);
     },
-  },
-  watch: {
-    $route() {},
+    removeBg(color) {
+      let about = document.querySelector(".about");
+      about.classList.remove(color);
+    },
   },
 };
 </script>

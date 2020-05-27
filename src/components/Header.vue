@@ -1,10 +1,15 @@
 <template>
     <header class="header">
         <div class="header-inner">
-            <div class="">WW2020</div>
-            <div class="">
-                <p>Surviving 2020</p>
-                <small>Responses from around the world</small>
+            <div class="app-left">
+                <router-link to="/">
+                    <div class="app-name">
+                        <span>Surviving 2020</span>
+                        <br>
+                        <!-- <small>WW MMXX ...</small> -->
+                    </div>
+
+                </router-link>
             </div>
         </div>
     </header>

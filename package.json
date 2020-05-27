@@ -12,7 +12,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "animate.css": "^4.1.0",
+    "axios": "^0.19.2",
     "vue": "^2.5.2",
+    "vue-autoscroll": "^1.2.1",
+    "vue-dynamic-marquee": "^0.1.6",
+    "vue-marquee-text-component": "^1.1.1",
+    "vue-page-transition": "^0.2.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
