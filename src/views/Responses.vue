@@ -2,14 +2,17 @@
     <div id="responses" class="responses">
         <div class="responses-bg">
             <div class="responses-toggle">
-                <button @click="togglePause">
-                    <img src="@/assets/play.svg" alt="play" v-if="pause" title="pause" />
-                    <img src="@/assets/pause.svg" alt="pause" v-if="!pause" title="play" />
+                <button :disabled="loading" @click="togglePause">
+                    <img src="@/assets/images/play.svg" alt="play" v-if="pause" title="pause" />
+                    <img src="@/assets/images/pause.svg" alt="pause" v-if="!pause" title="play" />
                 </button>
             </div>
             <div class="responses-list">
                 <div class="responses-inner">
-                    <dynamic-marquee :reverse="true" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
+                    <div v-if="loading">
+                        <img src="@/assets/images/loading.svg" alt="loading">
+                    </div>
+                    <dynamic-marquee v-else :reverse="true" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
                         <template v-for="(response, key) in responses">
                             <div class="single-response" :key="key">{{response.response}} &mdash;
                                 <span>{{response.name | capitalize}}, {{response.city |capitalize}}</span>
@@ -41,13 +44,13 @@ export default {
     };
   },
   beforeMount() {
-    this.loadResponses();
+    if (this.responses.length === 0) this.loadResponses();
   },
   computed: {
     scrollSpeed() {
       return {
         type: "duration",
-        number: 50000,
+        number: 40000,
       };
     },
   },
@@ -59,16 +62,14 @@ export default {
       this.error = false;
       this.loading = true;
       axios
-        .get("http://localhost:3200/api/responses")
+        .get("https://surviving-2020.herokuapp.com/")
         .then(res => {
           this.loading = false;
           this.responses = res.data.data.reverse();
-          console.log(res);
         })
         .catch(err => {
           this.loading = false;
           this.error = true;
-          console.log(err);
         });
     },
   },
