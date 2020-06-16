@@ -3,10 +3,10 @@
         <ul>
             <template v-if="$route.path == '/'">
                 <li class="footer-link" @mouseover="updateBg('green')" @mouseleave="removeBg('green')">
-                    <router-link to="/submit">Share your experience</router-link>
+                    <router-link to="/submit">Share your story</router-link>
                 </li>
                 <li class="footer-link" @mouseover="updateBg('pink')" @mouseleave="removeBg('pink')">
-                    <router-link to="/responses">Explore responses</router-link>
+                    <router-link to="/stories">Explore stories</router-link>
                 </li>
             </template>
             <template v-if="$route.path == '/submit'">
@@ -14,12 +14,12 @@
                     <router-link to="/">Go Back Home</router-link>
                 </li>
                 <li class="footer-link">
-                    <router-link to="/responses">Explore responses</router-link>
+                    <router-link to="/stories">Explore stories</router-link>
                 </li>
             </template>
-            <template v-if="$route.path == '/responses'">
-                <li v-if="$route.path == '/responses'" class="footer-link">
-                    <router-link to="/submit">Share your experience</router-link>
+            <template v-if="$route.path == '/stories'">
+                <li v-if="$route.path == '/stories'" class="footer-link">
+                    <router-link to="/submit">Share your story</router-link>
                 </li>
                 <li class="footer-link">
                     <router-link to="/">Go Back Home</router-link>

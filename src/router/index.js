@@ -29,13 +29,7 @@ const router = new Router({
             meta: { transition: 'overlay-up-full' },
         },
         {
-            path: '/thankyou',
-            name: 'Success',
-            component: Success,
-            meta: { transition: 'fade' },
-        },
-        {
-            path: '/responses',
+            path: '/stories',
             name: 'Responses',
             component: Responses,
             meta: { transition: 'overlay-right-full' },
@@ -47,22 +41,22 @@ const router = new Router({
     }
 })
 
-Vue.use(VueUA, {
-    appName: 'Surviving 2020',
-    appVersion: '1.1',
-    trackingId: 'UA-168893926-1',
-    vueRouter: router,
+// Vue.use(VueUA, {
+//     appName: 'Surviving 2020',
+//     appVersion: '1.1',
+//     trackingId: 'UA-168893926-1',
+//     vueRouter: router,
 
-    // Global Dimensions and Metrics can optionally be specified.
-    globalDimensions: [
-        { dimension: 1, value: 'FirstDimension' },
-        { dimension: 2, value: 'SecondDimension' }
-        // Because websites are only 2D, obviously. WebGL? What's that?
-    ],
-    globalMetrics: [
-        { metric: 1, value: 'MyMetricValue' },
-        { metric: 2, value: 'AnotherMetricValue' }
-    ]
-})
+//     // Global Dimensions and Metrics can optionally be specified.
+//     globalDimensions: [
+//         { dimension: 1, value: 'FirstDimension' },
+//         { dimension: 2, value: 'SecondDimension' }
+//         // Because websites are only 2D, obviously. WebGL? What's that?
+//     ],
+//     globalMetrics: [
+//         { metric: 1, value: 'MyMetricValue' },
+//         { metric: 2, value: 'AnotherMetricValue' }
+//     ]
+// })
 
 export default router

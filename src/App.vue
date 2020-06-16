@@ -4,11 +4,11 @@
             <router-view/>
         </vue-page-transition>
         <div class="app-footer">
-            <div class="app-donation-link">
+            <!-- <div class="app-donation-link">
                 <small>
                     <a href="https://www.linkedin.com/in/daraolayebi/" target="_blank" class="link">Click here</a> to donate to a cause.
                 </small>
-            </div>
+            </div> -->
             <div class="app-copyright-bar">
                 <small>A project by
                     <a href="https://www.linkedin.com/in/daraolayebi/" target="_blank" class="link"> Dara Olayebi</a>. &copy; 2020.

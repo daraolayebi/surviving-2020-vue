@@ -1,11 +1,18 @@
 <template>
     <div id="responses" class="responses">
+        <app-header />
         <div class="responses-bg">
-            <div class="responses-toggle">
-                <button :disabled="loading" @click="togglePause">
-                    <img src="@/assets/images/play.svg" alt="play" v-if="pause" title="pause" />
-                    <img src="@/assets/images/pause.svg" alt="pause" v-if="!pause" title="play" />
-                </button>
+            <div class="responses-topbar">
+                <div class="responses-count"></div>
+                <div class="responses-toggle">
+                    <button :disabled="loading" @click="togglePause">
+                        <img src="@/assets/images/play.svg" alt="play" v-if="pause" title="pause" />
+                        <img src="@/assets/images/pause.svg" alt="pause" v-if="!pause" title="play" />
+                    </button>
+                </div>
+                <div class="speed-toggle">
+
+                </div>
             </div>
             <div class="responses-list">
                 <div class="responses-inner">
@@ -14,8 +21,9 @@
                     </div>
                     <dynamic-marquee v-else :reverse="true" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
                         <template v-for="(response, key) in responses">
-                            <div class="single-response" :key="key">{{response.response}} &mdash;
-                                <span>{{response.name | capitalize}}, {{response.city |capitalize}}</span>
+                            <div class="single-response" :key="key">{{response.response}}
+                                <span class="response-dash">&mdash;</span>
+                                <span class="response-owner">{{response.name | capitalize}}, {{response.city |capitalize}}</span>
                             </div>
                         </template>
                     </dynamic-marquee>
@@ -27,11 +35,13 @@
 </template>
 
 <script>
+import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
 import DynamicMarquee from "vue-dynamic-marquee";
 import axios from "axios";
 export default {
   components: {
+    AppHeader,
     AppFooter,
     DynamicMarquee,
   },
@@ -50,8 +60,11 @@ export default {
     scrollSpeed() {
       return {
         type: "duration",
-        number: 40000,
+        number: 45000,
       };
+    },
+    responsesCount() {
+      return this.responses.length.toLocaleString();
     },
   },
   methods: {

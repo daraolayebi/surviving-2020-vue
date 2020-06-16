@@ -5,7 +5,9 @@
             <div class="inactive-overlay"></div>
             <div class="main-body-inner">
                 <user-form @updated-phrase="updateBackground" @form-submitted="submissionSuccess" v-if="!formSubmitted" />
-                <success v-if="formSubmitted" />
+                <transition name="success">
+                    <success v-if="formSubmitted" :user-response="userResponse" />
+                </transition>
             </div>
         </div>
         <app-footer />
@@ -28,6 +30,7 @@ export default {
     return {
       phraseId: "1",
       formSubmitted: false,
+      userResponse: "",
     };
   },
   created() {
@@ -37,15 +40,16 @@ export default {
     backgroundColor() {
       if (this.phraseId == 1) return "#3c4561";
       else if (this.phraseId == 2) return "#A96767";
-      else if (this.phraseId == 3) return "#9e8d5d";
+      else if (this.phraseId == 3) return "#497c88";
       else if (this.phraseId == 4) return "#376055";
       else if (this.phraseId == 5) return "#0E2533";
     },
   },
   methods: {
-    submissionSuccess() {
+    submissionSuccess(response) {
       this.formSubmitted = true;
       this.phraseId = 5;
+      this.userResponse = response;
     },
     updateBackground(id) {
       this.phraseId = id;
@@ -53,6 +57,31 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* .fade-enter-active {
+  transition: opacity 1.5s;
+}
+.fade-leave-active {
+  opacity: 0;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+} */
+/* Success Styles */
+.success-enter {
+  transform: translateX(30px);
+  opacity: 0;
+}
+.success-enter-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.success-leave-active,
+.success-leave-to {
+  opacity: 0;
+}
+</style>
     
 
 
