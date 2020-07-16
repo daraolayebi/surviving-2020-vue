@@ -1,30 +1,36 @@
 <template>
     <div>
         <app-header />
+        <div class="responses-bg"></div>
         <div class="main-body" :style="{ background: `${backgroundColor}` }">
+            <!-- <div class="circle-one" :style="{ background: `${backgroundColor}`, backgroundPosition: `${backgroundPosition}` }"></div>
+            <div class="circle-two" :style="{ background: `${backgroundColor}`, backgroundPosition: `${backgroundPosition}` }"></div> -->
             <div class="inactive-overlay"></div>
             <div class="main-body-inner">
                 <user-form @updated-phrase="updateBackground" @form-submitted="submissionSuccess" v-if="!formSubmitted" />
-                <transition name="success">
+                <transition name="fade">
                     <success v-if="formSubmitted" :user-response="userResponse" />
                 </transition>
             </div>
         </div>
-        <app-footer />
     </div>
 </template>
 
 <script>
+import { VueTypedJs } from "vue-typed-js";
 import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
 import UserForm from "../components/UserForm";
 import Success from "../views/Success";
+import DynamicMarquee from "vue-dynamic-marquee";
 export default {
   components: {
+    VueTypedJs,
     AppHeader,
     AppFooter,
     UserForm,
     Success,
+    DynamicMarquee,
   },
   data() {
     return {
@@ -37,11 +43,30 @@ export default {
     this.aboutIsVisible = true;
   },
   computed: {
+    responses() {
+      let all = this.$store.getters.responses;
+      return all.slice(0, 10);
+    },
+    scrollSpeed() {
+      return {
+        type: "duration",
+        number: 45000,
+      };
+    },
     backgroundColor() {
-      if (this.phraseId == 1) return "#3c4561";
-      else if (this.phraseId == 2) return "#A96767";
+      if (this.phraseId == 1) return "#0b1c25";
+      else if (this.phraseId == 2) return "#2D4134";
+      else if (this.phraseId == 3)
+        //#efb514
+        return "#497c88";
+      else if (this.phraseId == 4) return "#212448";
+      else if (this.phraseId == 5) return "#0E2533";
+    },
+    backgroundPosition() {
+      if (this.phraseId == 1) return "100px 30px";
+      else if (this.phraseId == 2) return "#884747";
       else if (this.phraseId == 3) return "#497c88";
-      else if (this.phraseId == 4) return "#376055";
+      else if (this.phraseId == 4) return "#2D4134";
       else if (this.phraseId == 5) return "#0E2533";
     },
   },
@@ -59,7 +84,7 @@ export default {
 </script>
 
 <style scoped>
-/* .fade-enter-active {
+.fade-enter-active {
   transition: opacity 1.5s;
 }
 .fade-leave-active {
@@ -67,18 +92,6 @@ export default {
 }
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
-} */
-/* Success Styles */
-.success-enter {
-  transform: translateX(30px);
-  opacity: 0;
-}
-.success-enter-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.success-leave-active,
-.success-leave-to {
   opacity: 0;
 }
 </style>

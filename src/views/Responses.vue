@@ -1,67 +1,64 @@
 <template>
     <div id="responses" class="responses">
-        <app-header />
-        <div class="responses-bg">
-            <div class="responses-topbar">
-                <div class="responses-count"></div>
-                <div class="responses-toggle">
-                    <button :disabled="loading" @click="togglePause">
-                        <img src="@/assets/images/play.svg" alt="play" v-if="pause" title="pause" />
-                        <img src="@/assets/images/pause.svg" alt="pause" v-if="!pause" title="play" />
-                    </button>
+        <app-header :pause="pause" @toggle-pause="togglePause" />
+        <div class="responses-bg"></div>
+        <div class="responses-list">
+            <div class="responses-inner">
+                <div v-if="loading" class="submit-loading">
+                    <img src="@/assets/images/loader.svg" alt="loading" width="26px">
                 </div>
-                <div class="speed-toggle">
-
-                </div>
-            </div>
-            <div class="responses-list">
-                <div class="responses-inner">
-                    <div v-if="loading">
-                        <img src="@/assets/images/loading.svg" alt="loading">
-                    </div>
-                    <dynamic-marquee v-else :reverse="true" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
+                <template v-else>
+                    <template v-if="windowWidth <= 640" v-for="(response, key) in responses">
+                        <div class="single-response" :key="key">{{response.response}}
+                            <!-- <span class="response-dash">&mdash;</span> -->
+                            <span class="response-owner">&mdash; {{response.name | capitalize}}, {{response.city | capitalize}}</span>
+                        </div>
+                    </template>
+                    <dynamic-marquee v-if="windowWidth > 640" :reverse="true" direction="column" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
                         <template v-for="(response, key) in responses">
                             <div class="single-response" :key="key">{{response.response}}
-                                <span class="response-dash">&mdash;</span>
-                                <span class="response-owner">{{response.name | capitalize}}, {{response.city |capitalize}}</span>
+                                <!-- <span class="response-dash">&mdash;</span> -->
+                                <span class="response-owner">&mdash; {{response.name | capitalize}}, {{response.city | capitalize}}</span>
                             </div>
                         </template>
                     </dynamic-marquee>
-                </div>
+                </template>
+
             </div>
         </div>
-        <app-footer />
     </div>
 </template>
 
 <script>
+import { VueTypedJs } from "vue-typed-js";
 import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
 import DynamicMarquee from "vue-dynamic-marquee";
 import axios from "axios";
 export default {
   components: {
+    VueTypedJs,
     AppHeader,
     AppFooter,
     DynamicMarquee,
   },
   data() {
     return {
-      responses: [],
       loading: false,
       error: false,
       pause: false,
+      windowWidth: window.innerWidth,
     };
   },
-  beforeMount() {
-    if (this.responses.length === 0) this.loadResponses();
+  created() {
+    this.$store.dispatch("FetchResponses");
   },
   computed: {
     scrollSpeed() {
-      return {
-        type: "duration",
-        number: 45000,
-      };
+      return { type: "duration", number: 45000 };
+    },
+    responses() {
+      return this.$store.getters.responses;
     },
     responsesCount() {
       return this.responses.length.toLocaleString();
@@ -70,20 +67,6 @@ export default {
   methods: {
     togglePause() {
       this.pause = !this.pause;
-    },
-    loadResponses() {
-      this.error = false;
-      this.loading = true;
-      axios
-        .get("https://surviving-2020.herokuapp.com/")
-        .then(res => {
-          this.loading = false;
-          this.responses = res.data.data.reverse();
-        })
-        .catch(err => {
-          this.loading = false;
-          this.error = true;
-        });
     },
   },
 };

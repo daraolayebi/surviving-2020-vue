@@ -1,55 +1,70 @@
 <template>
     <form class="user-form" @submit.prevent="submitResponse" autocomplete="off">
         <input autocomplete="false" name="hidden" type="text" style="display:none;">
-        <template v-if="!loading">
-            <div class="flex">
-                <div class="form-group">
-                    <div class="form-group-block" :class="{'error': nameError }">
-                        <label>Name:</label>
-                        <input type="text" aria-label="First Name" class="form-input" v-model="name" @focus="resetError" maxlength="20">
-                        <small class="form-warning">* This field is compulsory</small>
-                    </div>
-                    <div class="form-group-block" :class="{'error': cityError }">
-                        <label>City:</label>
-                        <input type="text" aria-label="City" class="form-input" v-model="city" @focus="resetError" maxlength="25">
-                        <small class="form-warning">* This field is compulsory</small>
+        <template v-if="!formLoading">
+
+            <template v-if="selected.id">
+                <div class="flex">
+                    <div class="form-group">
+                        <div class="form-group-block" :class="{'error': nameError }">
+                            <label>First Name:</label>
+                            <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
+                            <small class="form-warning">* This field is compulsory</small>
+                        </div>
+                        <div class="form-group-block" :class="{'error': cityError }">
+                            <label>City:</label>
+                            <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
+                            <small class="form-warning">* This field is compulsory</small>
+                        </div>
                     </div>
                 </div>
-                <!-- <span class="main-label-counter">{{selected.id}} / 4</span> -->
-            </div>
+            </template>
 
-            <div class="form-group main" :class="{'loading': loading}">
-                <div class="main-label">
-                    <span class="main-label-arrow" :class="{ 'paused' : phrasesVisible }" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')"></span>
-                    <!-- <div class="phrase-navigation">
-                        <div @click="goToPrevious" class="phrase-arrow" tabindex="0" role="button" aria-label="Previous slide">←</div> 
-
-                         <div @click="goToNext" class="phrase-arrow" tabindex="0" role="button" aria-label="Next slide">→</div> 
-                    </div> -->
-
-                    <li class="active" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">{{selected.message}}
-                        <span class="phrase-dots">. . .</span>
-                    </li>
-
+            <div class="form-group main" :class="{'loading': formLoading}">
+                <transition name="fade">
                     <ul class="phrase-dropdown">
                         <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase(phrase, '.inactive-overlay', '.phrase-dropdown')">{{ phrase.message }}
                             <span class="phrase-dots">. . .</span>
                         </li>
                     </ul>
+                </transition>
+
+                <div class="click-label" v-if="selected == 0">
+                    <div @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Click to choose your starting phrase</div>
                 </div>
-                <div class="form-group">
-                    <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause')" @focusout="hideClause('.form-clause')" placeholder="Fill in your response here . . ." class="main-input" maxlength="50" autocomplete="off">
-                    <button type="submit" class="button submit-button for-desktop" aria-label="Share" :disabled="loading">
-                        <img src="@/assets/images/send.svg" alt="submit">
-                    </button>
-                    <button type="submit" class="button submit-button for-mobile" aria-label="Share" :disabled="loading">Share</button>
-                </div>
-                <small class="form-clause">* By submitting, you agree to have your first name, city and response displayed on the responses page.</small>
-                <small v-if="error" class="form-error">We are having some trouble submitting your response. Please try again.</small>
+                <!-- <div class="main-label" v-else>
+                    <li class="active centered" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">{{selected.message}}</li>
+                </div> -->
+                <template v-else>
+                    <div class="main-label">
+                        <li class="active">{{selected.message}}
+                            <span class="phrase-dots">. . .</span>
+                        </li>
+                        <div class="main-label-toggle">
+                            <span @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')" v-if="selected.id > 1">Switch</span>
+                            <span v-if="selected.id > 1">{{selected.id}} / 4</span>
+                        </div>
+                    </div>
+                </template>
+                <template v-if="selected.id">
+                    <div class="form-group">
+                        <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause', '.submit-button')" @focusout="hideClause('.form-clause', '.submit-button')" placeholder="Your response goes here" class="main-input" maxlength="70" autocomplete="off">
+                    </div>
+                    <div class="form-footer">
+                        <small class="form-clause">* Once you submit, your name, city and response will be displayed on the stories page.</small>
+                        <button type="submit" class="button submit-button" aria-label="Submit" :disabled="formLoading">
+                            <span>Submit
+                                <img src="@/assets/images/arrow-navigation-white.svg" alt="" srcset="">
+                            </span>
+                        </button>
+                        <!-- <button type="submit" class="button submit-button for-mobile" aria-label="Submit Story" :disabled="formLoading">Share</button> -->
+                    </div>
+                </template>
+                <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
             </div>
         </template>
-        <div v-if="loading">
-            <img src="@/assets/images/loading.svg" alt="loading">
+        <div v-if="formLoading" class="submit-loading">
+            <img src="@/assets/images/loader.svg" alt="loading" width="26px">
         </div>
     </form>
 </template>
@@ -61,39 +76,60 @@ export default {
     return {
       name: "",
       city: "",
-      selected: { id: 1, message: "My 2020 has been" },
+      //selected: { id: 1, message: "My 2020 has been" },
+      selected: "0",
       response: "",
       button: false,
       phrases: [
         { id: 1, message: "My 2020 has been" },
-        { id: 2, message: "In this season, I have learnt" },
-        { id: 3, message: "After the pandemic, I will" },
-        { id: 4, message: "During self isolation, I" },
+        { id: 2, message: "During self isolation, I" },
+        { id: 3, message: "In this season, I have learnt" },
+        { id: 4, message: "After the pandemic, I will" },
       ],
       phrasesVisible: false,
-      loading: false,
-      error: false,
       nameError: false,
       cityError: false,
     };
   },
+  created() {
+    this.$store.commit("RESET_STATE");
+  },
   computed: {
+    formLoading() {
+      return this.$store.getters.formLoading;
+    },
+    formSubmitted() {
+      return this.$store.getters.formSubmitted;
+    },
     phraseListDisplay() {
       let list = [];
       this.phrases.forEach(phrase => {
-        if (phrase.message !== this.selected.message) list.push(phrase);
+        list.push(phrase);
+        //if (phrase.message !== this.selected.message) list.push(phrase);
       });
       return list;
     },
   },
-  methods: {
-    showClause(clause) {
-      let formClause = document.querySelector(clause);
-      formClause.classList.add("show");
+  watch: {
+    formSubmitted(value) {
+      let response = this.selected.message + " " + this.response;
+      if (value == true) this.$emit("form-submitted", response);
     },
-    hideClause(clause) {
+  },
+  methods: {
+    showClause(clause, button) {
       let formClause = document.querySelector(clause);
-      if (this.response.length == "") formClause.classList.remove("show");
+      let formButton = document.querySelector(button);
+      formClause.classList.add("show");
+      formButton.classList.add("show");
+    },
+    hideClause(clause, button) {
+      let formClause = document.querySelector(clause);
+      let formButton = document.querySelector(button);
+      if (this.response.length == "") {
+        formClause.classList.remove("show");
+        formButton.classList.remove("show");
+      }
     },
     goToPrevious() {
       if (this.selected.id === 2) this.selected.id = 1;
@@ -113,10 +149,10 @@ export default {
       let formClause = document.querySelector(clause);
       let button = document.querySelector(el);
       if (this.response.length === 0) {
-        button.classList.remove("visible");
+        button.classList.remove("show");
         formClause.classList.remove("show");
       } else {
-        button.classList.add("visible");
+        button.classList.add("show");
         formClause.classList.add("show");
       }
     },
@@ -125,14 +161,24 @@ export default {
       list.classList.add("show");
       let body = document.querySelector(el);
       body.classList.add("show");
+      if (document.querySelector(".click-label")) {
+        let clickPhrase = document.querySelector(".click-label");
+        clickPhrase.classList.add("hide");
+      }
       this.phrasesVisible = true;
     },
     updatePhrase(phrase, el, dropdown) {
       this.response = "";
+      this.nameError = false;
+      this.cityError = false;
       this.selected = { id: phrase.id, message: phrase.message };
       let list = document.querySelector(dropdown);
-      list.classList.remove("show");
       let body = document.querySelector(el);
+      if (document.querySelector(".click-label")) {
+        let clickPhrase = document.querySelector(".click-label");
+        clickPhrase.classList.remove("hide");
+      }
+      list.classList.remove("show");
       body.classList.remove("show");
       this.phrasesVisible = false;
       this.$emit("updated-phrase", phrase.id);
@@ -148,28 +194,12 @@ export default {
         };
         this.nameError = false;
         this.cityError = false;
-        this.error = false;
-        this.loading = true;
-        axios
-          .post("https://surviving-2020.herokuapp.com/", payload)
-          .then(res => {
-            this.loading = false;
-            this.name = "";
-            this.city = "";
-            let userResponse = this.selected.message + " " + this.response;
-            this.$emit("form-submitted", userResponse);
-          })
-          .catch(err => {
-            this.loading = false;
-            console.log(err);
-            this.error = true;
-          });
+        this.$store.dispatch("SubmitResponse", payload);
       }
     },
   },
   destroyed() {
     //   this.submitted = false
-    //   this.loading = false
   },
 };
 </script>

@@ -1,0 +1,106 @@
+<template>
+    <div class="slideshow-container">
+        <div v-for="i in [currentIndex]" :key="i">
+            <div class="slideshow-slide" :style="{ backgroundImage: `url(${currentImg})` }"></div>
+        </div>
+    </div>
+</template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      images: [
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880447/Surviving%202020/f_dfnrfd.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880448/Surviving%202020/e_beghp0.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880448/Surviving%202020/a_nlr9bj.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880451/Surviving%202020/h_y8h0ew.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880452/Surviving%202020/i_loodtk.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933178/Surviving%202020/c_ck3zkm.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880451/Surviving%202020/j_jerxlr.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880450/Surviving%202020/g_mxz4bj.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593883791/Surviving%202020/k_vt4r2k.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880452/Surviving%202020/d_ibbg5z.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933175/Surviving%202020/ab_zlfwcd.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593888535/Surviving%202020/l_wof3u5.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593888538/Surviving%202020/o_wf733p.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934014/Surviving%202020/p_cfkl4v.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934015/Surviving%202020/m_jg7vo5.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934013/Surviving%202020/n_ga8h3t.png",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593880448/Surviving%202020/b_mjhhgs.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593891652/Surviving%202020/s_bdctkf.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593891651/Surviving%202020/t_m6eou7.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934014/Surviving%202020/r_jou9ap.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593900474/Surviving%202020/w_tke7uw.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933452/Surviving%202020/zf_m66zln.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933453/Surviving%202020/zh_n0fvx6.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933453/Surviving%202020/zj_uohhuq.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593900474/Surviving%202020/u_wonz4s.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593900474/Surviving%202020/y_nc2shc.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933453/Surviving%202020/zg_vswsl9.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934013/Surviving%202020/x_sbnkjo.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934012/Surviving%202020/v_uhlcg5.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934012/Surviving%202020/z_xu4gzz.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593902038/Surviving%202020/za_bda964.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594934012/Surviving%202020/zb_xc4nnh.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593902040/Surviving%202020/zc_vy5woj.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1593964248/Surviving%202020/zd_g5tat2.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594933453/Surviving%202020/ze_o9kzyn.jpg",
+        "https://res.cloudinary.com/du6l81yvs/image/upload/q_auto/v1594932996/Surviving%202020/zi_ebi36j_ytikua.jpg",
+      ],
+      timer: null,
+      currentIndex: 0,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.startSlide();
+    }, 2000);
+  },
+  computed: {
+    currentImg: function() {
+      return this.images[Math.abs(this.currentIndex) % this.images.length];
+    },
+  },
+  methods: {
+    startSlide: function() {
+      this.timer = setInterval(this.next, 170);
+    },
+    next: function() {
+      this.currentIndex += 1;
+    },
+    prev: function() {
+      this.currentIndex -= 1;
+    },
+  },
+};
+</script>
+
+<style>
+.slideshow {
+  z-index: 9999;
+}
+.slideshow-slide {
+  display: block;
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+}
+
+@media screen and (max-width: 480px) {
+  .slideshow-slide {
+    width: 230px;
+    height: 230px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .slideshow-slide {
+    width: 190px;
+    height: 190px;
+  }
+}
+</style>
+

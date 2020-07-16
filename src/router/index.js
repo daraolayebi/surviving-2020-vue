@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
+import About from '@/views/About'
+import HomeNew from '@/views/HomeNew'
 import Form from '@/views/Form'
 import Success from '@/views/Success'
 import Responses from '@/views/Responses'
@@ -23,7 +25,13 @@ const router = new Router({
             meta: { transition: 'overlay-down-full' },
         },
         {
-            path: '/submit',
+            path: '/about',
+            name: 'About',
+            component: About,
+            meta: { transition: 'fade-in' },
+        },
+        {
+            path: '/submit-story',
             name: 'Form',
             component: Form,
             meta: { transition: 'overlay-up-full' },

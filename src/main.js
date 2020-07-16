@@ -3,12 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import Animate from 'animate.css'
 import Autoscroll from 'vue-autoscroll'
 import VueAnalytics from 'vue-analytics'
 import VuePageTransition from 'vue-page-transition'
 import VueSocialSharing from 'vue-social-sharing'
+import Clipboard from 'v-clipboard'
 
+Vue.use(Clipboard)
 Vue.use(VueSocialSharing);
 Vue.use(VuePageTransition)
 Vue.use(Autoscroll)
@@ -36,6 +39,7 @@ Vue.config.productionTip = false
 new Vue({
     el: '#app',
     router,
+    store,
     components: { App },
     template: '<App/>'
 })
