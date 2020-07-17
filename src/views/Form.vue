@@ -1,7 +1,6 @@
 <template>
     <div>
         <app-header />
-        <div class="responses-bg"></div>
         <div class="main-body" :style="{ background: `${backgroundColor}` }">
             <!-- <div class="circle-one" :style="{ background: `${backgroundColor}`, backgroundPosition: `${backgroundPosition}` }"></div>
             <div class="circle-two" :style="{ background: `${backgroundColor}`, backgroundPosition: `${backgroundPosition}` }"></div> -->
