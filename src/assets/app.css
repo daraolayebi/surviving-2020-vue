@@ -786,7 +786,7 @@ input {
 
 .single-response {
     font-size: 20px;
-    padding: 20px 0;
+    padding: 23px 0;
 }
 
 .single-response.white {
@@ -1537,7 +1537,13 @@ li.active.centered {
         height: 35px;
     }
     .single-response {
-        font-size: 16px;
+        font-size: 18px;
+    }
+    .responses-inner {
+        text-align: left;
+    }
+    .responses-list {
+        padding-top: 100px;
     }
     .mobile-menu {
         display: block;
@@ -1569,9 +1575,6 @@ li.active.centered {
     .about-inner {
         max-width: 100%;
         padding: 30px;
-    }
-    .single-response {
-        font-size: 15px;
     }
     .response-owner {
         display: block;

@@ -3,23 +3,6 @@
         <input autocomplete="false" name="hidden" type="text" style="display:none;">
         <template v-if="!formLoading">
 
-            <template v-if="selected.id">
-                <div class="flex">
-                    <div class="form-group">
-                        <div class="form-group-block" :class="{'error': nameError }">
-                            <label>First Name:</label>
-                            <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
-                            <small class="form-warning">* This field is compulsory</small>
-                        </div>
-                        <div class="form-group-block" :class="{'error': cityError }">
-                            <label>City:</label>
-                            <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
-                            <small class="form-warning">* This field is compulsory</small>
-                        </div>
-                    </div>
-                </div>
-            </template>
-
             <div class="form-group main" :class="{'loading': formLoading}">
                 <transition name="fade">
                     <ul class="phrase-dropdown">
@@ -35,14 +18,28 @@
                 <!-- <div class="main-label" v-else>
                     <li class="active centered" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">{{selected.message}}</li>
                 </div> -->
+
                 <template v-else>
+                    <div class="form-group">
+                        <div class="form-group-block" :class="{'error': nameError }">
+                            <label>First Name:</label>
+                            <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
+                            <small class="form-warning">* This field is compulsory</small>
+                        </div>
+                        <div class="form-group-block" :class="{'error': cityError }">
+                            <label>City:</label>
+                            <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
+                            <small class="form-warning">* This field is compulsory</small>
+                        </div>
+                    </div>
+
                     <div class="main-label">
                         <li class="active">{{selected.message}}
                             <span class="phrase-dots">. . .</span>
                         </li>
                         <div class="main-label-toggle">
-                            <span @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')" v-if="selected.id > 1">Switch</span>
-                            <span v-if="selected.id > 1">{{selected.id}} / 4</span>
+                            <span @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Switch</span>
+                            <span>{{selected.id}} / 4</span>
                         </div>
                     </div>
                 </template>
@@ -76,7 +73,6 @@ export default {
     return {
       name: "",
       city: "",
-      //selected: { id: 1, message: "My 2020 has been" },
       selected: "0",
       response: "",
       button: false,
