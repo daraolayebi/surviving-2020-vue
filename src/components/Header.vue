@@ -12,11 +12,6 @@
                 <img v-if="!mobileMenu" src="@/assets/images/menuu.svg" alt="menu" class="mobile-menu">
                 <img v-else src="@/assets/images/close.svg" alt="menu" class="mobile-menu">
             </div>
-            <div class="phrase-toggle" v-if="isFormPage">
-                <button @click="$emit('show-phrases')">
-                    <img src="@/assets/images/refresh.svg" alt="refresh" title="refresh" />
-                </button>
-            </div>
         </div>
         <div class="mobile-menu-list">
             <div class="app-name">

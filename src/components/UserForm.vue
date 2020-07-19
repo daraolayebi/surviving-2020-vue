@@ -1,57 +1,64 @@
 <template>
-    <form class="user-form" @submit.prevent="submitResponse" autocomplete="off">
-        <input autocomplete="false" name="hidden" type="text" style="display:none;">
-        <template v-if="!formLoading">
-            <transition name="fade">
-                <ul class="phrase-dropdown">
-                    <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase(phrase, '.inactive-overlay', '.phrase-dropdown')">{{ phrase.message }}
-                        <span class="phrase-dots">. . .</span>
-                    </li>
-                </ul>
-            </transition>
-            <div class="form-body">
-                <div v-if="selected == 0" class="click-label">
-                    <h1 class="animated-text" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Click to choose your starting phrase</h1>
-                </div>
-                <template v-else>
-                    <div class="form-group-block" :class="{'error': nameError }">
-                        <label>First Name:</label>
-                        <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
-                        <small class="form-warning">* This field is mandatory</small>
-                    </div>
-                    <div class="form-group-block" :class="{'error': cityError }">
-                        <label>City:</label>
-                        <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
-                        <small class="form-warning">* This field is mandatory</small>
-                    </div>
-                    <div class="main-label">
-                        <li class="active">{{selected.message}}
-                            <span class="phrase-dots">. . .</span>
-                        </li>
-                        <div class="main-label-toggle">
-                            <span @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Switch</span>
-                            <span>{{selected.id}} / 4</span>
+    <div>
+        <button class="phrase-toggle" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">
+            <img src="@/assets/images/refresh.svg" alt="refresh" title="refresh" />
+        </button>
+        <div class="user-form">
+            <form @submit.prevent="submitResponse" autocomplete="off">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                <template v-if="!formLoading">
+                    <transition name="fade">
+                        <ul class="phrase-dropdown">
+                            <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase(phrase, '.inactive-overlay', '.phrase-dropdown')">{{ phrase.message }}
+                                <span class="phrase-dots">. . .</span>
+                            </li>
+                        </ul>
+                    </transition>
+                    <div class="form-body">
+                        <div v-if="selected == 0" class="click-label">
+                            <h1 class="animated-text" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Click to choose your starting phrase</h1>
                         </div>
+                        <template v-else>
+                            <div class="form-group-block" :class="{'error': nameError }">
+                                <label>First Name:</label>
+                                <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
+                                <small class="form-warning">* This field is mandatory</small>
+                            </div>
+                            <div class="form-group-block" :class="{'error': cityError }">
+                                <label>City:</label>
+                                <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
+                                <small class="form-warning">* This field is mandatory</small>
+                            </div>
+                            <div class="main-label">
+                                <li class="active">{{selected.message}}
+                                    <span class="phrase-dots">. . .</span>
+                                </li>
+                                <div class="main-label-toggle">
+                                    <span @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Switch</span>
+                                    <span>{{selected.id}} / 4</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause', '.submit-button')" @focusout="hideClause('.form-clause', '.submit-button')" placeholder="Your response goes here" class="main-input" maxlength="70" autocomplete="off">
+                            </div>
+                            <div class="form-footer">
+                                <small class="form-clause">* Once you submit, your name, city and response will be displayed on the stories page.</small>
+                                <button type="submit" class="button submit-button" aria-label="Submit" :disabled="formLoading">
+                                    <span>Submit
+                                        <img src="@/assets/images/arrow-navigation-white.svg" alt="" srcset="">
+                                    </span>
+                                </button>
+                            </div>
+                            <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
+                        </template>
                     </div>
-                    <div class="form-group">
-                        <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause', '.submit-button')" @focusout="hideClause('.form-clause', '.submit-button')" placeholder="Your response goes here" class="main-input" maxlength="70" autocomplete="off">
-                    </div>
-                    <div class="form-footer">
-                        <small class="form-clause">* Once you submit, your name, city and response will be displayed on the stories page.</small>
-                        <button type="submit" class="button submit-button" aria-label="Submit" :disabled="formLoading">
-                            <span>Submit
-                                <img src="@/assets/images/arrow-navigation-white.svg" alt="" srcset="">
-                            </span>
-                        </button>
-                    </div>
-                    <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
                 </template>
-            </div>
-        </template>
-        <div v-if="formLoading" class="submit-loading">
-            <img src="@/assets/images/loader.svg" alt="loading" width="26px">
+                <div v-if="formLoading" class="submit-loading">
+                    <img src="@/assets/images/loader.svg" alt="loading" width="26px">
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </template>
 
 <script>
