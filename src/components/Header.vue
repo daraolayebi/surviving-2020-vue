@@ -12,10 +12,9 @@
                 <img v-if="!mobileMenu" src="@/assets/images/menuu.svg" alt="menu" class="mobile-menu">
                 <img v-else src="@/assets/images/close.svg" alt="menu" class="mobile-menu">
             </div>
-            <div class="responses-toggle" v-if="isStoriesPage">
-                <button @click="$emit('toggle-pause')">
-                    <img src="@/assets/images/play.svg" alt="play" v-if="pause" title="pause" />
-                    <img src="@/assets/images/pause.svg" alt="pause" v-if="!pause" title="play" />
+            <div class="phrase-toggle" v-if="isFormPage">
+                <button @click="$emit('show-phrases')">
+                    <img src="@/assets/images/refresh.svg" alt="refresh" title="refresh" />
                 </button>
             </div>
         </div>
@@ -90,8 +89,8 @@ export default {
     VueTypedJs,
   },
   computed: {
-    isStoriesPage() {
-      if (this.$route.path === "/stories") return true;
+    isFormPage() {
+      if (this.$route.path === "/submit-story") return true;
       else return false;
     },
     nextPage() {

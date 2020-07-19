@@ -2,37 +2,28 @@
     <form class="user-form" @submit.prevent="submitResponse" autocomplete="off">
         <input autocomplete="false" name="hidden" type="text" style="display:none;">
         <template v-if="!formLoading">
-
-            <div class="form-group main" :class="{'loading': formLoading}">
-                <transition name="fade">
-                    <ul class="phrase-dropdown">
-                        <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase(phrase, '.inactive-overlay', '.phrase-dropdown')">{{ phrase.message }}
-                            <span class="phrase-dots">. . .</span>
-                        </li>
-                    </ul>
-                </transition>
-
-                <div class="click-label" v-if="selected == 0">
-                    <div @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Click to choose your starting phrase</div>
+            <transition name="fade">
+                <ul class="phrase-dropdown">
+                    <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase(phrase, '.inactive-overlay', '.phrase-dropdown')">{{ phrase.message }}
+                        <span class="phrase-dots">. . .</span>
+                    </li>
+                </ul>
+            </transition>
+            <div class="form-body">
+                <div v-if="selected == 0" class="click-label">
+                    <h1 class="animated-text" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Click to choose your starting phrase</h1>
                 </div>
-                <!-- <div class="main-label" v-else>
-                    <li class="active centered" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">{{selected.message}}</li>
-                </div> -->
-
                 <template v-else>
-                    <div class="form-group">
-                        <div class="form-group-block" :class="{'error': nameError }">
-                            <label>First Name:</label>
-                            <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
-                            <small class="form-warning">* This field is compulsory</small>
-                        </div>
-                        <div class="form-group-block" :class="{'error': cityError }">
-                            <label>City:</label>
-                            <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
-                            <small class="form-warning">* This field is compulsory</small>
-                        </div>
+                    <div class="form-group-block" :class="{'error': nameError }">
+                        <label>First Name:</label>
+                        <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
+                        <small class="form-warning">* This field is mandatory</small>
                     </div>
-
+                    <div class="form-group-block" :class="{'error': cityError }">
+                        <label>City:</label>
+                        <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
+                        <small class="form-warning">* This field is mandatory</small>
+                    </div>
                     <div class="main-label">
                         <li class="active">{{selected.message}}
                             <span class="phrase-dots">. . .</span>
@@ -42,8 +33,6 @@
                             <span>{{selected.id}} / 4</span>
                         </div>
                     </div>
-                </template>
-                <template v-if="selected.id">
                     <div class="form-group">
                         <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause', '.submit-button')" @focusout="hideClause('.form-clause', '.submit-button')" placeholder="Your response goes here" class="main-input" maxlength="70" autocomplete="off">
                     </div>
@@ -54,10 +43,9 @@
                                 <img src="@/assets/images/arrow-navigation-white.svg" alt="" srcset="">
                             </span>
                         </button>
-                        <!-- <button type="submit" class="button submit-button for-mobile" aria-label="Submit Story" :disabled="formLoading">Share</button> -->
                     </div>
+                    <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
                 </template>
-                <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
             </div>
         </template>
         <div v-if="formLoading" class="submit-loading">
@@ -154,12 +142,16 @@ export default {
     },
     showPhraseOptions(el, dropdown) {
       let list = document.querySelector(dropdown);
-      list.classList.add("show");
       let body = document.querySelector(el);
+      list.classList.add("show");
       body.classList.add("show");
       if (document.querySelector(".click-label")) {
         let clickPhrase = document.querySelector(".click-label");
         clickPhrase.classList.add("hide");
+      }
+      if (document.querySelector(".form-body")) {
+        let formBody = document.querySelector(".form-body");
+        formBody.classList.add("hidden");
       }
       this.phrasesVisible = true;
     },
@@ -173,6 +165,10 @@ export default {
       if (document.querySelector(".click-label")) {
         let clickPhrase = document.querySelector(".click-label");
         clickPhrase.classList.remove("hide");
+      }
+      if (document.querySelector(".form-body")) {
+        let formBody = document.querySelector(".form-body");
+        formBody.classList.remove("hidden");
       }
       list.classList.remove("show");
       body.classList.remove("show");

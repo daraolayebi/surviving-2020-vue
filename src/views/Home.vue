@@ -11,9 +11,9 @@
 
                 <transition name="slide-fade">
                     <div v-if="showIntro">
-                        <h1 class="main">
+                        <h1>
                             <vue-typed-js :type-speed="38" :start-delay="2000" :showCursor="false" :strings="['Take a moment to share your 2020 experience and discover what the rest of the world is going through ...']">
-                                <span data-title="Take a moment to share your 2020 experiences and discover what the rest of the world is going through ..." class="typing"></span>
+                                <span class="animated-text typing" data-title="Take a moment to share your 2020 experiences and discover what the rest of the world is going through ..."></span>
                             </vue-typed-js>
                         </h1>
                     </div>

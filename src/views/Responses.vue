@@ -1,7 +1,7 @@
 <template>
     <div id="responses" class="responses">
         <app-header :pause="pause" @toggle-pause="togglePause" />
-        <div class="responses-bg"></div>
+        <!-- <div class="responses-bg"></div> -->
         <div class="responses-list">
             <div class="responses-inner">
                 <div v-if="loading" class="submit-loading">
@@ -23,7 +23,12 @@
                         </template>
                     </dynamic-marquee>
                 </template>
-
+            </div>
+            <div class="responses-toggle">
+                <button @click="togglePause">
+                    <img src="@/assets/images/play.svg" alt="play" v-if="pause" title="pause" />
+                    <img src="@/assets/images/pause.svg" alt="pause" v-if="!pause" title="play" />
+                </button>
             </div>
         </div>
     </div>
