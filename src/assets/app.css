@@ -449,7 +449,6 @@ input {
 }
 
 .main-body-inner {
-    height: 100vh;
     padding: 0 160px;
     overflow: hidden;
 }
@@ -1569,6 +1568,10 @@ li.active.centered {
         padding: 0 30px;
         z-index: 99999999;
     }
+
+    .footer .footer-link:not(:first-of-type) {
+        display: none;
+    }
     .footer-link {
         font-size: 18px;
     }
@@ -1745,9 +1748,6 @@ li.active.centered {
     }
     .footer-link {
         font-size: 14px;
-    }
-    .footer .footer-link:not(:first-of-type) {
-        display: none;
     }
     .app-copyright-bar {
         text-align: center;
