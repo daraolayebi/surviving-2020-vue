@@ -328,6 +328,11 @@ button {
     color: #ffffff;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     font-family: "Brown", sans-serif;
     font-family: "After Screen", sans-serif;
@@ -480,7 +485,8 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     /* max-width: 100%;
     width: 100%; */
 }
@@ -1156,6 +1162,7 @@ a[class^="share-network"] span {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    letter-spacing: -0.1px;
 }
 
 .main-label-toggle {
@@ -1612,9 +1619,9 @@ li.active.centered {
 }
 
 @media screen and (max-width: 640px) {
-    .user-form {
+    /* .user-form {
         margin-top: 15vh;
-    }
+    } */
     .form-group-flex {
         flex-direction: column;
     }
