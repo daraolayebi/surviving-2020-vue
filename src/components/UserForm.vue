@@ -34,8 +34,8 @@
                                     <span class="phrase-dots">. . .</span>
                                 </li>
                                 <div class="main-label-toggle">
-                                    <span @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Switch</span>
-                                    <span>{{selected.id}} / 4</span>
+                                    <p class="phrase-switch" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Switch</p>
+                                    <!-- <p class="phrase-number">{{selected.id}} / 4</p> -->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -43,13 +43,15 @@
                             </div>
                             <div class="form-footer">
                                 <small class="form-clause">* Once you submit, your name, city and response will be displayed on the stories page.</small>
+                            </div>
+                            <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
+                            <div class="form-button">
                                 <button type="submit" class="button submit-button" aria-label="Submit" :disabled="formLoading">
                                     <span>Submit
                                         <img src="@/assets/images/arrow-navigation-white.svg" alt="" srcset="">
                                     </span>
                                 </button>
                             </div>
-                            <small v-if="formSubmitted == false" class="form-error">We are having some trouble submitting your response. Please try again.</small>
                         </template>
                     </div>
                 </template>

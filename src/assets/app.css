@@ -21,9 +21,30 @@
 @font-face {
     font-family: "After Screen";
     src: url("~@/assets/fonts/aften_screen.ttf") format("truetype");
-    font-weight: normal;
+    font-weight: 400;
     font-style: normal;
 }
+
+@font-face {
+    font-family: "After Screen";
+    src: url("~@/assets/fonts/aften_screen.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* @font-face {
+    font-family: "Sailec";
+    src: url("~@/assets/fonts/sailec-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Sailec";
+    src: url("~@/assets/fonts/sailec-medium.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+} */
 
 @font-face {
     font-family: "Sofiapro";
@@ -312,6 +333,8 @@ body {
     font-family: "After Screen", sans-serif;
     font-size: 18px;
     font-weight: 300;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
 body.slide-out {
@@ -1130,6 +1153,28 @@ a[class^="share-network"] span {
     font-size: 55px;
     margin: 80px 0 40px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-label-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* font-family: "Brown", sans-serif; */
+    /* font-family: "RationalBold", sans-serif; */
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.phrase-switch {
+    cursor: pointer;
+}
+
+.phrase-number {
+    transform: rotate(90deg);
+    margin-left: 20px;
 }
 
 .click-label {
@@ -1202,29 +1247,11 @@ li.active.centered {
     }
 }
 
-.main-label-toggle {
-    position: absolute;
-    right: 0;
-    top: 23px;
-    font-family: "Brown", sans-serif;
-    font-family: "RationalBold", sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.main-label-toggle span:first-of-type {
-    cursor: pointer;
-}
-
-.main-label-toggle span:nth-of-type(2n) {
-    margin-left: 20px;
-}
-
 .main-input {
     width: 100%;
     text-align: left;
     font-size: 50px;
-    padding: 6px 0;
+    padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.431);
     border-radius: 0;
 }
@@ -1345,7 +1372,7 @@ li.active.centered {
 .button {
     cursor: pointer;
     font-weight: 500;
-    font-size: 45px;
+    font-size: 42px;
     color: #ffffff;
 }
 
@@ -1381,16 +1408,21 @@ li.active.centered {
 } */
 
 .form-footer {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-top: 20px;
+    justify-content: space-between; */
+    padding-top: 15px;
+}
+
+.form-button {
+    text-align: right;
 }
 
 .form-clause {
     font-size: 12px;
     display: block;
     opacity: 0;
+    /* text-align: right; */
     transition: all 500ms ease;
 }
 
@@ -1476,8 +1508,7 @@ li.active.centered {
         font-size: 28px;
     }
     .main-label,
-    .main-input,
-    .phrase-item {
+    .main-input {
         font-size: 45px;
     }
     .button {
@@ -1658,6 +1689,12 @@ li.active.centered {
     }
     a[class^="share-network"] {
         margin: 0;
+    }
+    .form-button {
+        position: absolute;
+        bottom: 0;
+        right: 27px;
+        height: 70px;
     }
 }
 

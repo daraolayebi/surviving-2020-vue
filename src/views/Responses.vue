@@ -8,13 +8,13 @@
                     <img src="@/assets/images/loader.svg" alt="loading" width="26px">
                 </div>
                 <template v-else>
-                    <template v-if="windowWidth <= 640" v-for="(response, key) in responses">
+                    <template v-if="windowWidth <= 1024" v-for="(response, key) in responses">
                         <div class="single-response" :key="key">{{response.response}}
                             <!-- <span class="response-dash">&mdash;</span> -->
                             <span class="response-owner">&mdash; {{response.name | capitalize}}, {{response.city | capitalize}}</span>
                         </div>
                     </template>
-                    <dynamic-marquee v-if="windowWidth > 640" :reverse="true" direction="column" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
+                    <dynamic-marquee v-if="windowWidth > 1024" :reverse="true" direction="column" :speed="scrollSpeed" :hoverPause="false" :pause="pause">
                         <template v-for="(response, key) in responses">
                             <div class="single-response" :key="key">{{response.response}}
                                 <!-- <span class="response-dash">&mdash;</span> -->
@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     scrollSpeed() {
-      return { type: "duration", number: 45000 };
+      return { type: "duration", number: 70000 };
     },
     responses() {
       return this.$store.getters.responses;
