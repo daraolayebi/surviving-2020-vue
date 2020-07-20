@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="phrase-toggle" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">
+        <button v-if="selected.id" class="phrase-toggle" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">
             <img src="@/assets/images/refresh.svg" alt="refresh" title="refresh" />
         </button>
         <div class="user-form">

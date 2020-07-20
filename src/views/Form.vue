@@ -54,7 +54,7 @@ export default {
     },
     backgroundColor() {
       if (this.phraseId == 1) return "#0b1c25";
-      else if (this.phraseId == 2) return "#2D4134";
+      else if (this.phraseId == 2) return "#09474B";
       else if (this.phraseId == 3)
         //#efb514
         return "#497c88";

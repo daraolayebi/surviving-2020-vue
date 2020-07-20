@@ -1588,6 +1588,16 @@ li.active.centered {
         max-width: 100%;
         padding: 30px;
     }
+    .user-form {
+        max-width: 85%;
+    }
+    .success-wrapper h1 {
+        font-size: 26px;
+    }
+    .share-wrapper,
+    .success-headings {
+        margin: 30px;
+    }
     .response-owner {
         display: block;
         font-size: 13px;
