@@ -1,8 +1,8 @@
 <template>
     <div>
-        <!-- <button v-if="selected.id" class="phrase-toggle" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">
+        <button v-if="selected.id" class="phrase-toggle" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">
             <img src="@/assets/images/refresh.svg" alt="refresh" title="refresh" />
-        </button> -->
+        </button>
         <div class="user-form">
             <form @submit.prevent="submitResponse" autocomplete="off">
                 <input autocomplete="false" name="hidden" type="text" style="display:none;">

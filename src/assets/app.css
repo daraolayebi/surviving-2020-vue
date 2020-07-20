@@ -1612,6 +1612,9 @@ li.active.centered {
 }
 
 @media screen and (max-width: 640px) {
+    .user-form {
+        margin-top: 15vh;
+    }
     .form-group-flex {
         flex-direction: column;
     }
