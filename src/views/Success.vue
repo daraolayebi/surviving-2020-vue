@@ -6,7 +6,7 @@
             <!--<h1 data-title="Yours is now one of them!">We have received
                 <span class="count">{{count.toLocaleString()}}</span> responses so far.</h1>
             <h1 data-title="Yours is now one of them!">Yours is now one of them!</h1>-->
-            <h1 data-title="Explore stories from the rest of the world" class="success-cta" @click="$router.push('/stories')">Explore others from around the world <img src="@/assets/images/arrow-navigation.svg" alt="arrow" class="success-arrow"></h1>
+            <h1 data-title="Explore stories from the rest of the world" class="success-cta" @click="$router.push('/stories')">Explore other stories <img src="@/assets/images/arrow-navigation.svg" alt="arrow" class="success-arrow"></h1>
         </div>
 
         <div class="share-wrapper">

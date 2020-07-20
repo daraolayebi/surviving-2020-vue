@@ -186,10 +186,12 @@ export default {
       if (this.name == "") this.nameError = true;
       if (this.city == "") this.cityError = true;
       else {
+        let response =
+          this.response.charAt(0).toLowerCase() + this.response.slice(1);
         let payload = {
           name: this.name,
           city: this.city,
-          response: this.selected.message + " " + this.response,
+          response: this.selected.message + " " + response,
         };
         this.nameError = false;
         this.cityError = false;

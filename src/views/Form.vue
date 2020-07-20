@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      phraseId: "1",
+      phraseId: "0",
       formSubmitted: false,
       userResponse: "",
     };
@@ -53,21 +53,19 @@ export default {
       };
     },
     backgroundColor() {
-      if (this.phraseId == 1) return "#0b1c25";
-      else if (this.phraseId == 2) return "#09474B";
-      else if (this.phraseId == 3)
-        //#efb514
-        return "#497c88";
-      else if (this.phraseId == 4) return "#212448";
-      else if (this.phraseId == 5) return "#0E2533";
+      if (this.phraseId == 0) return "#0b1c25";
+      else if (this.phraseId == 1) return "#0b565a";
+      else if (this.phraseId == 2) return "#497c88";
+      else if (this.phraseId == 3) return "#776079";
+      else if (this.phraseId == 4) return "#344D68";
     },
-    backgroundPosition() {
-      if (this.phraseId == 1) return "100px 30px";
-      else if (this.phraseId == 2) return "#884747";
-      else if (this.phraseId == 3) return "#497c88";
-      else if (this.phraseId == 4) return "#2D4134";
-      else if (this.phraseId == 5) return "#0E2533";
-    },
+    // backgroundPosition() {
+    //   if (this.phraseId == 1) return "100px 30px";
+    //   else if (this.phraseId == 2) return "#884747";
+    //   else if (this.phraseId == 3) return "#497c88";
+    //   else if (this.phraseId == 4) return "#2D4134";
+    //   else if (this.phraseId == 5) return "#0E2533";
+    // },
   },
   methods: {
     submissionSuccess(response) {
