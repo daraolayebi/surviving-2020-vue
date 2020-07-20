@@ -462,6 +462,10 @@ input {
     width: 100%;
 }
 
+.user-form form {
+    width: 100%;
+}
+
 .typed-element {
     justify-content: center !important;
 }
