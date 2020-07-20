@@ -958,7 +958,7 @@ input {
     /* font-family: "Brown", sans-serif;
     text-transform: uppercase; */
     display: inline-block;
-    /* font-size: 15px; */
+    font-size: 16px;
     padding: 10px 0 5px;
     /* font-weight: 400;
     letter-spacing: 3px; */
@@ -1694,6 +1694,7 @@ li.active.centered {
         padding-right: 30px;
         align-items: center;
         height: 100vh;
+        overflow: hidden;
     }
     /* .main-label-toggle {
         display: none;
@@ -1713,7 +1714,7 @@ li.active.centered {
     }
     .form-input {
         margin-right: 0;
-        font-size: 16px;
+        font-size: 18px;
         padding: 9px 0;
         width: 100%;
     }
