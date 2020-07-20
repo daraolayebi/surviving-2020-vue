@@ -438,6 +438,7 @@ input {
 
 .main-body {
     height: 100vh;
+    overflow: hidden;
 }
 
 .main-body.green {
@@ -450,7 +451,6 @@ input {
 
 .main-body-inner {
     padding: 0 160px;
-    overflow: hidden;
 }
 
 .user-form {
@@ -904,7 +904,6 @@ input {
 }
 
 .form-body {
-    position: relative;
     transition: all 500ms ease-in-out;
 }
 
@@ -1550,7 +1549,7 @@ li.active.centered {
     }
     .phrase-toggle {
         display: block;
-        position: fixed;
+        position: absolute;
         margin-top: -5px;
         right: 30px;
         top: 30px;
