@@ -1,40 +1,41 @@
 <template>
-    <div>
-        <button v-if="selected.id" class="phrase-toggle" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">
-            <img src="@/assets/images/refresh.svg" alt="refresh" title="refresh" />
+    <div class="story-form">
+        <button v-if="selected.id" class="phrase-toggle" @click="showPhraseOptions('body')">
+            <img src="@/assets/images/reset.svg" alt="refresh" title="refresh" />
         </button>
-        <div class="user-form">
-            <form @submit.prevent="submitResponse" autocomplete="off">
-                <input autocomplete="false" name="hidden" type="text" style="display:none;">
-                <template v-if="!formLoading">
-                    <transition name="fade">
-                        <ul class="phrase-dropdown">
-                            <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase(phrase, '.inactive-overlay', '.phrase-dropdown')">{{ phrase.message }}
-                                <span class="phrase-dots">. . .</span>
-                            </li>
-                        </ul>
-                    </transition>
+        <div class="story-form-container">
+            <template v-if="!formLoading">
+                <transition name="fade">
+                    <ul class="phrase-dropdown">
+                        <li class="phrase-item" v-for="(phrase, key) in phraseListDisplay" :key="key" @click="updatePhrase('body', phrase)">{{ phrase.message }}
+                            <span class="phrase-dots">. . .</span>
+                        </li>
+                    </ul>
+                </transition>
+                <form @submit.prevent="submitResponse" autocomplete="off">
+                    <input autocomplete="false" name="hidden" type="text" style="display:none;">
+
                     <div class="form-body">
                         <div v-if="selected == 0" class="click-label">
-                            <h1 class="animated-text" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Click to choose your starting phrase</h1>
+                            <h1 class="animated-text" @click="showPhraseOptions('body')">Click to choose your starting phrase</h1>
                         </div>
                         <template v-else>
                             <div class="form-group-block" :class="{'error': nameError }">
                                 <label>First Name:</label>
-                                <input type="text" aria-label="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
+                                <input type="text" aria-label="First Name" name="First Name" class="form-input" placeholder="First Name" v-model="name" @focus="resetError" maxlength="20">
                                 <small class="form-warning">* This field is mandatory</small>
                             </div>
                             <div class="form-group-block" :class="{'error': cityError }">
                                 <label>City:</label>
-                                <input type="text" aria-label="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
+                                <input type="text" aria-label="City" name="City" class="form-input" placeholder="City" v-model="city" @focus="resetError" maxlength="25">
                                 <small class="form-warning">* This field is mandatory</small>
                             </div>
                             <div class="main-label">
-                                <li class="active">{{selected.message}}
+                                <div>{{selected.message}}
                                     <span class="phrase-dots">. . .</span>
-                                </li>
+                                </div>
                                 <div class="main-label-toggle">
-                                    <p class="phrase-switch" @click="showPhraseOptions('.inactive-overlay', '.phrase-dropdown')">Switch</p>
+                                    <p class="phrase-switch" @click="showPhraseOptions('body')">Switch</p>
                                     <!-- <p class="phrase-number">{{selected.id}} / 4</p> -->
                                 </div>
                             </div>
@@ -54,11 +55,11 @@
                             </div>
                         </template>
                     </div>
-                </template>
-                <div v-if="formLoading" class="submit-loading">
-                    <img src="@/assets/images/loader.svg" alt="loading" width="26px">
-                </div>
-            </form>
+                </form>
+            </template>
+            <div v-if="formLoading" class="loader-icon">
+                <img src="@/assets/images/loader.svg" alt="loading">
+            </div>
         </div>
     </div>
 </template>
@@ -79,7 +80,6 @@ export default {
         { id: 3, message: "In this season, I have learnt" },
         { id: 4, message: "After the pandemic, I will" },
       ],
-      phrasesVisible: false,
       nameError: false,
       cityError: false,
     };
@@ -105,7 +105,9 @@ export default {
   },
   watch: {
     formSubmitted(value) {
-      let response = this.selected.message + " " + this.response;
+      let lowercaseResponse =
+        this.response.charAt(0).toLowerCase() + this.response.slice(1);
+      let response = this.selected.message + " " + this.lowercaseResponse;
       if (value == true) this.$emit("form-submitted", response);
     },
   },
@@ -149,39 +151,17 @@ export default {
         formClause.classList.add("show");
       }
     },
-    showPhraseOptions(el, dropdown) {
-      let list = document.querySelector(dropdown);
-      let body = document.querySelector(el);
-      list.classList.add("show");
-      body.classList.add("show");
-      if (document.querySelector(".click-label")) {
-        let clickPhrase = document.querySelector(".click-label");
-        clickPhrase.classList.add("hide");
-      }
-      if (document.querySelector(".form-body")) {
-        let formBody = document.querySelector(".form-body");
-        formBody.classList.add("hidden");
-      }
-      this.phrasesVisible = true;
+    showPhraseOptions(body) {
+      let appBody = document.querySelector(body);
+      appBody.classList.add("has-phrases");
     },
-    updatePhrase(phrase, el, dropdown) {
+    updatePhrase(body, phrase) {
       this.response = "";
       this.nameError = false;
       this.cityError = false;
       this.selected = { id: phrase.id, message: phrase.message };
-      let list = document.querySelector(dropdown);
-      let body = document.querySelector(el);
-      if (document.querySelector(".click-label")) {
-        let clickPhrase = document.querySelector(".click-label");
-        clickPhrase.classList.remove("hide");
-      }
-      if (document.querySelector(".form-body")) {
-        let formBody = document.querySelector(".form-body");
-        formBody.classList.remove("hidden");
-      }
-      list.classList.remove("show");
-      body.classList.remove("show");
-      this.phrasesVisible = false;
+      let appBody = document.querySelector(body);
+      appBody.classList.remove("has-phrases");
       this.$emit("updated-phrase", phrase.id);
     },
     submitResponse() {

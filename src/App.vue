@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <app-header />
         <vue-page-transition>
             <router-view/>
         </vue-page-transition>
@@ -7,8 +8,12 @@
 </template>
 
 <script>
-import reset from "./assets/app.css";
+import AppHeader from "./components/Header";
+import style from "./assets/app.scss";
 export default {
+  components: {
+    AppHeader,
+  },
   computed: {
     responses() {
       return this.$store.getters.responses;

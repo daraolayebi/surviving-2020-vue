@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <header class="app-header">
         <div class="header-inner">
             <router-link to="/" class="for-desktop">
                 <div class="app-name">
@@ -9,9 +9,10 @@
                 </div>
             </router-link>
             <div class="mobile-menu-icon" @click="toggleMenu('.mobile-menu-list')">
-                <img v-if="!mobileMenu" src="@/assets/images/menuu.svg" alt="menu" class="mobile-menu">
+                <img v-if="!mobileMenu" src="@/assets/images/menu.svg" alt="menu" class="mobile-menu">
                 <img v-else src="@/assets/images/close.svg" alt="menu" class="mobile-menu">
             </div>
+
         </div>
         <div class="mobile-menu-list">
             <div class="app-name">
@@ -35,37 +36,7 @@
         <transition name="fade">
             <about v-if="showAbout" @close-about="closeAbout" />
         </transition>
-    </div>
-
-    <!-- <header class="header">
-        <div class="header-inner">
-             <div>
-                <img v-if="this.$route.path === '/'" src="@/assets/images/mobile-navigation-transparent.svg" class="mobile-menu left">
-                <img v-else @click="$router.go(-1)" src="@/assets/images/mobile-navigation.svg" alt="go back" class="mobile-menu left">
-            </div> 
-            
-            <div class="app-left">
-                <router-link to="/">
-                    <div class="app-name">
-                        <vue-typed-js :showCursor="false" :strings="['Surviving 2020']">
-                            <span class="typing"></span>
-                        </vue-typed-js>
-                    </div>
-                </router-link>
-            </div>
-            <div class="header-nav">
-                <div>
-                    <img src="@/assets/images/global-share.svg" width="20" alt="share">
-                </div>
-                <div>
-                    <img src="@/assets/images/about-project.svg" width="20" alt="share">
-                </div>
-            </div>
-
-            <img src="@/assets/images/mobile-navigation.svg" alt="go forward" v-if="this.$route.path !== '/stories'" @click="$router.push(nextPage)">
-
-        </div>
-    </header> -->
+    </header>
 </template>
 
 <script>
@@ -97,6 +68,7 @@ export default {
     $route() {
       let menu = document.querySelector(".mobile-menu-list");
       menu.classList.remove("show");
+      this.mobileMenu = false;
     },
   },
   methods: {

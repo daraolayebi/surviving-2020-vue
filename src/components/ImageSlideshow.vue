@@ -1,7 +1,7 @@
 <template>
-    <div class="slideshow-container">
-        <div v-for="i in [currentIndex]" :key="i">
-            <div class="slideshow-slide" :style="{ backgroundImage: `url(${currentImg})` }"></div>
+    <div class="slideshow">
+        <div class="slideshow-container">
+            <div class="slideshow-slide" v-for="i in [currentIndex]" :key="i" :style="{ backgroundImage: `url(${currentImg})` }"></div>
         </div>
     </div>
 </template>
@@ -77,30 +77,4 @@ export default {
 };
 </script>
 
-<style>
-.slideshow {
-  z-index: 9999;
-}
-.slideshow-slide {
-  display: block;
-  background-size: cover;
-  background-position: center;
-  width: 300px;
-  height: 300px;
-}
-
-@media screen and (max-width: 480px) {
-  .slideshow-slide {
-    width: 230px;
-    height: 230px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .slideshow-slide {
-    width: 190px;
-    height: 190px;
-  }
-}
-</style>
 

@@ -1,64 +1,59 @@
 <template>
-    <div>
-        <div id="about" class="about">
-            <app-header />
-            <div class="about-inner">
-                <transition name="slide-fade">
-                    <div class="slideshow" v-if="slideshow">
-                        <slide-show />
-                    </div>
-                </transition>
+    <div class="home">
+        <div class="home-inner">
+            <transition name="slide-fade">
+                <image-slideshow v-if="showSlideshow" />
+            </transition>
 
-                <transition name="slide-fade">
-                    <div v-if="showIntro">
-                        <h1>
-                            <vue-typed-js :type-speed="38" :start-delay="2000" :showCursor="false" :strings="['Take a moment to share your 2020 experience and discover what the rest of the world is going through ...']">
-                                <span class="animated-text typing" data-title="Take a moment to share your 2020 experiences and discover what the rest of the world is going through ..."></span>
-                            </vue-typed-js>
-                        </h1>
-                    </div>
-                </transition>
-                <transition name="fade">
-                    <app-footer v-if="showMenus" @show-about="showAbout = true" />
-                </transition>
+            <transition name="slide-fade">
+                <h1 class="home-intro" v-if="showIntro">
+                    <vue-typed-js :type-speed="38" :start-delay="2000" :showCursor="false" :strings="['Take a moment to share your 2020 experience and discover what the rest of the world is going through ...']">
+                        <span class="animated-text typing" data-title="Take a moment to share your 2020 experiences and discover what the rest of the world is going through ..."></span>
+                    </vue-typed-js>
+                </h1>
+            </transition>
 
-            </div>
+            <transition name="fade">
+                <about v-if="showAbout" @close-about="showAbout = false" />
+            </transition>
+
+            <transition name="fade">
+                <home-menu v-if="showMenu" @show-about="showAbout = true" />
+            </transition>
         </div>
     </div>
 </template>
 
 <script>
+import About from "./About";
+import ImageSlideshow from "../components/ImageSlideshow";
+import HomeMenu from "../components/HomeMenu";
 import { VueTypedJs } from "vue-typed-js";
-import SlideShow from "./SlideShow";
-import UserForm from "./Form";
-import AppHeader from "../components/Header";
-import AppFooter from "../components/Footer";
 export default {
   data() {
     return {
-      slideshow: false,
+      showSlideshow: false,
       showIntro: false,
-      showMenus: false,
+      showMenu: false,
       showAbout: false,
       pageLoading: false,
     };
   },
   components: {
-    SlideShow,
-    UserForm,
-    AppHeader,
-    AppFooter,
+    About,
+    ImageSlideshow,
+    HomeMenu,
     VueTypedJs,
   },
   created() {
-    this.slideshow = false;
+    this.showSlideshow = false;
     if (document.readyState == "complete") {
-      this.slideshow = true;
+      this.showSlideshow = true;
       this.homeSequence();
     }
     document.onreadystatechange = () => {
       if (document.readyState == "complete") {
-        this.slideshow = true;
+        this.showSlideshow = true;
         this.homeSequence();
       }
     };
@@ -66,19 +61,19 @@ export default {
   methods: {
     homeSequence() {
       setTimeout(() => {
-        this.slideshow = false;
+        this.showSlideshow = false;
         this.showIntro = true;
-        let about = document.querySelector(".about");
-        about.classList.add("full");
+        let home = document.querySelector(".home");
+        home.classList.add("no-divider");
       }, 10000);
       setTimeout(() => {
-        this.showMenus = true;
+        this.showMenu = true;
       }, 13000);
     },
   },
   destroyed() {
-    let about = document.querySelector(".about");
-    about.classList.remove("full");
+    let home = document.querySelector(".home");
+    home.classList.add("no-divider");
   },
 };
 </script>

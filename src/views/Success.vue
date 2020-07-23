@@ -1,16 +1,21 @@
 <template>
     <div class="success-wrapper">
         <div class="success-headings">
-            <h1 data-title="A big thank you.">Thank you for sharing your 2020 story!<br></h1>
-
-            <!--<h1 data-title="Yours is now one of them!">We have received
-                <span class="count">{{count.toLocaleString()}}</span> responses so far.</h1>
-            <h1 data-title="Yours is now one of them!">Yours is now one of them!</h1>-->
-            <h1 data-title="Explore stories from the rest of the world" class="success-cta" @click="$router.push('/stories')">Explore other stories <img src="@/assets/images/arrow-navigation.svg" alt="arrow" class="success-arrow"></h1>
+            <h1>Thank you! Here's to surviving 2020 together!</h1>
+            <div class="success-cta">
+                <h1 @click="$emit('refresh-form')">
+                    <span class="animated-text">Share another story</span>
+                    <img src="@/assets/images/plus.svg" alt="arrow" class="success-arrow">
+                </h1>
+                <h1 @click="goToStories">
+                    <span class="animated-text">Explore other stories</span>
+                    <img src="@/assets/images/arrow.svg" alt="arrow" class="success-arrow">
+                </h1>
+            </div>
         </div>
 
         <div class="share-wrapper">
-            <span class="intro">Share this project:</span>
+            <span class="share-label">Share Project:</span>
             <div class="share-channels">
                 <div class="share-network">
                     <ShareNetwork network="twitter" url="https://www.our2020stories.com/#/" :title="`${userResponse}. Share your 2020 story in a sentence! And read stories from around the world!`" description="" quote="" hashtags="surviving2020">
@@ -31,14 +36,10 @@
                             <img src="@/assets/images/copy.svg" alt="linkedin" style="width:19px;margin-top: -4px;">
                             <span>Copy Link</span>
                         </button>
-                        <!-- <input type="text" :value="URLToCopy" id="copy-link" style="display:none">
-                        <img src="@/assets/images/copy.svg" alt="linkedin" style="width:19px;margin-top: -4px;">
-                        <span>Copy Link</span> -->
                     </a>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -48,7 +49,6 @@ export default {
   props: ["userResponse"],
   data() {
     return {
-      count: 0,
       value: "www.our2020stories.com",
     };
   },
@@ -56,9 +56,12 @@ export default {
     copySuccess({ value, event }) {
       console.log("success", value);
     },
-
     copyError({ value, event }) {
       console.log("error", value);
+    },
+    goToStories() {
+      this.$store.dispatch("FetchResponses");
+      this.$router.push("/stories");
     },
   },
 };
