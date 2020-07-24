@@ -14,10 +14,6 @@
             </transition>
 
             <transition name="fade">
-                <about v-if="showAbout" @close-about="showAbout = false" />
-            </transition>
-
-            <transition name="fade">
                 <home-menu v-if="showMenu" @show-about="showAbout = true" />
             </transition>
         </div>

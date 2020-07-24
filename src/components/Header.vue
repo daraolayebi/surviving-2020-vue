@@ -12,8 +12,8 @@
                 <img v-if="!mobileMenu" src="@/assets/images/menu.svg" alt="menu" class="mobile-menu">
                 <img v-else src="@/assets/images/close.svg" alt="menu" class="mobile-menu">
             </div>
-
         </div>
+
         <div class="mobile-menu-list">
             <div class="app-name">
                 <vue-typed-js :showCursor="false" :strings="['Surviving 2020']">
@@ -33,6 +33,7 @@
                 <router-link to="/stories">Explore stories</router-link>
             </li>
         </div>
+
         <transition name="fade">
             <about v-if="showAbout" @close-about="closeAbout" />
         </transition>

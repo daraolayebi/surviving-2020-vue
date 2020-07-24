@@ -2,7 +2,7 @@
     <div id="app">
         <app-header />
         <vue-page-transition>
-            <router-view/>
+            <router-view />
         </vue-page-transition>
     </div>
 </template>
