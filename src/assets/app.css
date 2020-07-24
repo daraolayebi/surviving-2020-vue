@@ -469,7 +469,7 @@ input {
   top: 0;
   right: 0;
   bottom: 0;
-  padding: 0 160px;
+  padding: 0 150px;
 }
 
 .submit-story.green {
@@ -478,10 +478,6 @@ input {
 
 .submit-story.blue {
   background: #497c88 !important;
-}
-
-.main-body-inner {
-  padding: 0 160px;
 }
 
 .story-form {
@@ -1317,7 +1313,7 @@ body.has-phrases .phrase-dropdown li:last-of-type {
 }
 
 body.has-phrases .inactive-overlay {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.911);
   /* background: rgb(0, 0, 0);
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.85) 100%); */
   z-index: 99;
@@ -1363,7 +1359,7 @@ body.has-phrases .phrase-toggle {
 .button {
   cursor: pointer;
   font-weight: 500;
-  font-size: 42px;
+  font-size: 40px;
   color: #ffffff;
 }
 
@@ -1461,10 +1457,9 @@ body.has-phrases .phrase-toggle {
 }
 
 @media screen and (max-device-width: 1366px) and (orientation: landscape) {
-  /* .footer,
-    .header {
-        padding: 60px 5%;
-    } */
+  .submit-story {
+    padding: 0 100px;
+  }
 }
 
 @media screen and (max-device-width: 1366px) and (orientation: portrait) {

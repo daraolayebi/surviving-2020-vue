@@ -35,7 +35,7 @@
                                     <span class="phrase-dots">. . .</span>
                                 </div>
                                 <div class="main-label-toggle">
-                                    <p class="phrase-switch" @click="showPhraseOptions('body')">Switch</p>
+                                    <p class="phrase-switch" @click="showPhraseOptions('body')">Switch Phrase</p>
                                     <!-- <p class="phrase-number">{{selected.id}} / 4</p> -->
                                 </div>
                             </div>

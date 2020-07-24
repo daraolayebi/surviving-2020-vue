@@ -64,7 +64,7 @@ export default {
       }, 10000);
       setTimeout(() => {
         this.showMenu = true;
-      }, 13000);
+      }, 12000);
     },
   },
   destroyed() {
