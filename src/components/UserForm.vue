@@ -96,10 +96,7 @@ export default {
     },
     phraseListDisplay() {
       let list = [];
-      this.phrases.forEach(phrase => {
-        list.push(phrase);
-        //if (phrase.message !== this.selected.message) list.push(phrase);
-      });
+      this.phrases.forEach(phrase => list.push(phrase));
       return list;
     },
   },
@@ -125,16 +122,6 @@ export default {
         formClause.classList.remove("show");
         formButton.classList.remove("show");
       }
-    },
-    goToPrevious() {
-      if (this.selected.id === 2) this.selected.id = 1;
-      if (this.selected.id === 3) this.selected.id = 2;
-      if (this.selected.id === 4) this.selected.id = 3;
-    },
-    goToNext() {
-      if (this.selected.id === 1) this.selected.id = 2;
-      if (this.selected.id === 2) this.selected.id = 3;
-      if (this.selected.id === 3) this.selected.id = 4;
     },
     resetError() {
       this.nameError = false;
@@ -180,9 +167,6 @@ export default {
         this.$store.dispatch("SubmitResponse", payload);
       }
     },
-  },
-  destroyed() {
-    //   this.submitted = false
   },
 };
 </script>
