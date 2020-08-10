@@ -57,7 +57,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.startSlide();
-    }, 2000);
+    }, 1000);
   },
   computed: {
     currentImg: function() {
