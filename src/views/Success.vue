@@ -1,7 +1,7 @@
 <template>
     <div class="success-wrapper">
         <div class="success-headings">
-            <h1>Thank you! Here's to surviving 2020 together!</h1>
+            <h1>Here's to surviving 2020 together!</h1>
             <div class="success-cta">
                 <h1 @click="$emit('refresh-form')">
                     <span class="animated-text">Share another story</span>
