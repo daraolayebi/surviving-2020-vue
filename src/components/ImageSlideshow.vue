@@ -1,7 +1,8 @@
 <template>
     <div class="slideshow">
         <div class="slideshow-container">
-            <div class="slideshow-slide" v-for="i in [currentIndex]" :key="i" :style="{ backgroundImage: `url(${currentImg})` }"></div>
+            <div class="slideshow-gif"></div>
+            <!-- <div class="slideshow-slide" v-for="i in [currentIndex]" :key="i" :style="{ backgroundImage: `url(${currentImg})` }"></div> -->
         </div>
     </div>
 </template>

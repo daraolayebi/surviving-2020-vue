@@ -35,12 +35,12 @@
                                     <span class="phrase-dots">. . .</span>
                                 </div>
                                 <div class="main-label-toggle">
-                                    <p class="phrase-switch" @click="showPhraseOptions('body')">Switch Phrase</p>
+                                    <p class="phrase-switch" @click="showPhraseOptions('body')">Change Story</p>
                                     <!-- <p class="phrase-number">{{selected.id}} / 4</p> -->
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause', '.submit-button')" @focusout="hideClause('.form-clause', '.submit-button')" placeholder="Your response goes here" class="main-input" maxlength="70" autocomplete="off">
+                                <input type="text" v-model="response" id="response" @keypress="showSubmitButton('.submit-button', '.form-clause')" @keyup="showSubmitButton('.submit-button', '.form-clause')" @focus="showClause('.form-clause', '.submit-button')" @focusout="hideClause('.form-clause', '.submit-button')" placeholder="Your response goes here" class="main-input" maxlength="70" autocomplete="off" required>
                             </div>
                             <div class="form-footer">
                                 <small class="form-clause">* Once you submit, your name, city and response will be displayed on the stories page.</small>
@@ -58,7 +58,11 @@
                 </form>
             </template>
             <div v-if="formLoading" class="loader-icon">
-                <img src="@/assets/images/loader.svg" alt="loading">
+                <span class="saving">Saving your story
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </span>
             </div>
         </div>
     </div>
