@@ -1,7 +1,8 @@
 <template>
     <div class="story-form">
         <button v-if="selected.id" class="phrase-toggle" @click="showPhraseOptions('body')">
-            <img src="@/assets/images/reset.svg" alt="refresh" title="refresh" />
+            <img src="@/assets/images/refresh-sharp.svg" alt="refresh" title="refresh" />
+            <!-- reset -->
         </button>
         <div class="story-form-container">
             <template v-if="!formLoading">
