@@ -61,7 +61,7 @@ export default {
         this.showIntro = true;
         let home = document.querySelector(".home");
         home.classList.add("no-divider");
-      }, 10000);
+      }, 8500);
       setTimeout(() => {
         this.showMenu = true;
       }, 12000);

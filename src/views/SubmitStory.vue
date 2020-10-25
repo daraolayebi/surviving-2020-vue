@@ -5,7 +5,7 @@
             <user-form @updated-phrase="updateBackground" @form-submitted="submissionSuccess" v-if="!formSubmitted" />
         </transition>
         <transition name="fade">
-            <success v-if="formSubmitted" :user-response="userResponse" @refresh-form="formSubmitted = false" />
+            <success v-if="formSubmitted" @refresh-form="formSubmitted = false" />
         </transition>
     </div>
 </template>
@@ -22,7 +22,6 @@ export default {
     return {
       phraseId: "0",
       formSubmitted: false,
-      userResponse: "",
     };
   },
   created() {
@@ -50,10 +49,9 @@ export default {
     },
   },
   methods: {
-    submissionSuccess(response) {
+    submissionSuccess() {
       this.formSubmitted = true;
       this.phraseId = 5;
-      this.userResponse = response;
     },
     updateBackground(id) {
       this.phraseId = id;

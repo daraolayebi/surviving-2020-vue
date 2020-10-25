@@ -81,9 +81,9 @@ export default {
       button: false,
       phrases: [
         { id: 1, message: "My 2020 has been" },
-        { id: 2, message: "During self isolation, I" },
+        { id: 2, message: "This year, I witnessed" },
         { id: 3, message: "In this season, I have learnt" },
-        { id: 4, message: "After the pandemic, I will" },
+        { id: 4, message: "Next year, I will" },
       ],
       nameError: false,
       cityError: false,
@@ -91,6 +91,7 @@ export default {
   },
   created() {
     this.$store.commit("RESET_STATE");
+    document.querySelector("body").classList.remove("has-phrases");
   },
   computed: {
     formLoading() {
@@ -107,10 +108,7 @@ export default {
   },
   watch: {
     formSubmitted(value) {
-      let lowercaseResponse =
-        this.response.charAt(0).toLowerCase() + this.response.slice(1);
-      let response = this.selected.message + " " + this.lowercaseResponse;
-      if (value == true) this.$emit("form-submitted", response);
+      if (value) this.$emit("form-submitted");
     },
   },
   methods: {
@@ -157,8 +155,8 @@ export default {
       this.$emit("updated-phrase", phrase.id);
     },
     submitResponse() {
-      if (this.name == "") this.nameError = true;
-      if (this.city == "") this.cityError = true;
+      if (this.name === "") this.nameError = true;
+      if (this.city === "") this.cityError = true;
       else {
         let response =
           this.response.charAt(0).toLowerCase() + this.response.slice(1);

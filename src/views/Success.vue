@@ -18,13 +18,13 @@
             <span class="share-label">Share Project:</span>
             <div class="share-channels">
                 <div class="share-network">
-                    <ShareNetwork network="twitter" url="https://www.our2020stories.com/#/" :title="`${userResponse}. Share your 2020 story in a sentence! And read stories from around the world!`" description="" quote="" hashtags="surviving2020">
+                    <ShareNetwork network="twitter" url="https://www.our2020stories.com/#/" title="Share your 2020 story in a sentence! And read stories from around the world!" description="" quote="" hashtags="surviving2020">
                         <img src="@/assets/images/twitter.svg" alt="twitter">
                         <span>Twitter</span>
                     </ShareNetwork>
                 </div>
                 <div class="share-network">
-                    <ShareNetwork network="facebook" url="https://www.our2020stories.com/#/" :title="`${userResponse}. Share your 2020 story in a sentence! And read stories from around the world!`" description="" quote="" hashtags="surviving2020">
+                    <ShareNetwork network="facebook" url="https://www.our2020stories.com/#/" title="Share your 2020 story in a sentence! And read stories from around the world!" description="" quote="" hashtags="surviving2020">
                         <img src="@/assets/images/facebook.svg" alt="facebook" style="width:9px">
                         <span>Facebook</span>
                     </ShareNetwork>
@@ -46,7 +46,6 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["userResponse"],
   data() {
     return {
       value: "www.our2020stories.com",
